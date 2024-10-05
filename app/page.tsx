@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "next/font/google";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const res = await fetch("https://godomainsih.vercel.app/api/python");
 
-  const data = await res.json();
+  const data = await res.text();
   console.log(data);
 
   // console.log(data);

@@ -7,7 +7,7 @@ from flask.helpers import send_file
 
 app = Flask(__name__)
 
-@app.route("/api/python")
+@app.route("https://godomainsih.vercel.app/api/python")
 def hello_world():
     # with open('/data.json') as f:
     #     data = json.load(f)
