@@ -3,6 +3,7 @@
 import React from "react";
 import Details from "./details";
 import { fetchData } from "../_actions/fetchData";
+import { validateDomain } from "../_actions/validate";
 
 const InputSearch = () => {
   try {
@@ -13,7 +14,16 @@ const InputSearch = () => {
 
     const handleSubmit = async (domainName: string) => {
       setLoading(true);
-      setData(await fetchData(domainName));
+
+      const validatedDomainName = validateDomain(domainName);
+
+      if (!validatedDomainName) {
+        alert("Invalid domain name");
+        setLoading(false);
+        return;
+      }
+
+      setData(await fetchData(validatedDomainName));
 
       setLoading(false);
     };
@@ -35,7 +45,11 @@ const InputSearch = () => {
             Search
           </button>
         </div>
-        {loading && <div className="w-full text-center">Loading.....</div>}
+        {loading && (
+          <div className="w-full text-center my-10">
+            Fetching every possible data for you.....
+          </div>
+        )}
         {data && <Details data={data} />}
       </main>
     );
